@@ -45,22 +45,48 @@ public class TelefonoMovil {
 
 
 	
-	
+
+
+	@Override
+	public String toString() {
+		return "TelefonoMovil [memoMax=" + memoMax + ", memoMaxAplicaciones=" + memoMaxAplicaciones
+				+ ", memoMaxArchivos=" + memoMaxArchivos + ", cantMaxAplicaciones=" + cantMaxAplicaciones
+				+ ", cantMaxArchivos=" + cantMaxArchivos + ", listaAplicaciones=" + listaAplicaciones
+				+ ", listaArchivos=" + listaArchivos + ", registroAplicaciones=" + registroAplicaciones
+				+ ", cantidadAplicacionesPorTipo=" + cantidadAplicacionesPorTipo + ", cantidadArchivosPorTipo="
+				+ cantidadArchivosPorTipo + ", cantidadMemoriaPorTipoAplicacion=" + cantidadMemoriaPorTipoAplicacion
+				+ ", cantidadMemoriaPorTipoArchivo=" + cantidadMemoriaPorTipoArchivo + "]";
+	}
+
+
 
 
 
 	public void guardarArchivo(Archivo archivo) {
 		
+		if (!(memoMax <= memoMax + archivo.getSizeMb())) System.out.println("El archivo supera la memoria máxima del dispositivo.");
+			
+		if (!(memoMaxArchivos <= memoMaxArchivos + archivo.getSizeMb())) System.out.println("El archivo supera la memoria máxima de archivos permitidos.");	
+	
+		if (!(cantMaxArchivos <= listaArchivos.size() + 1)) System.out.println("El archivo supera la cantidad máxima de archivos permitidos.");	
 		
-		
-		
-		if ( memoMax >= memoMax + archivo.getSizeMb()) {
-			memoMax = memoMax + archivo.getSizeMb();
-		}
+
+			
+			for (Archivo ar : listaArchivos) {
+				
+				if(ar.equals(archivo)) {
+					System.out.println("Archivo ya existente.");
+				} else {
+					listaArchivos.add(archivo);
+					memoMax += archivo.getSizeMb();
+					memoMaxArchivos += archivo.getSizeMb();
+				}
+				
+			}
+			
 		
 		
 	}
-	
 	
 	
 }

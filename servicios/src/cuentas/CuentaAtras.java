@@ -13,7 +13,7 @@ public class CuentaAtras {
 	}
 	
 	
-	public void arranca() {
+	public void arranca() {      
 		for (int i =valorInicial; i >= 0 ; i--) {
 			System.out.printf("%s: %d%n", nombre, i);
 			

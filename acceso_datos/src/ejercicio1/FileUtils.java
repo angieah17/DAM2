@@ -19,9 +19,17 @@ public class FileUtils {
 			return false;
 		}
 		
-		System.out.printf("Permisos: r:%s, w:%s, x:%s%n ",f.canRead(), f.canWrite(), f.canExecute());
+		System.out.printf("Permisos: r:%s, w:%s, x:%s%nParent: %s%nName: %s ",f.canRead(), f.canWrite(), 
+				f.canExecute(),f.getParent(), f.getName() );
+		
+		double megabytes = (double) f.length() / (1024 * 1024);
+		
+		if(f.isFile()) System.out.printf("Tamaño:%.2fMB", megabytes);
 		
 		
+		if(f.isDirectory()) {
+			
+		}
 		
 		
 		return true;

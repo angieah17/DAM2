@@ -19,7 +19,7 @@ public class FileUtils {
 			return false;
 		}
 		
-		System.out.printf("Permisos: r:%s, w:%s, x:%s%nParent: %s%nName: %s ",f.canRead(), f.canWrite(), 
+		System.out.printf("Permisos: r:%s, w:%s, x:%s%nParent: %s%nName: %s%n",f.canRead(), f.canWrite(), 
 				f.canExecute(),f.getParent(), f.getName() );
 		
 		double megabytes = (double) f.length() / (1024 * 1024);
@@ -29,6 +29,11 @@ public class FileUtils {
 		
 		if(f.isDirectory()) {
 			
+			File[] soloArchivos = f.listFiles(x -> x.isFile());
+
+			for (File x : soloArchivos) {
+			    System.out.printf("Los archivos que están dentro del directorio son: %s%n",x.getName());
+			}
 		}
 		
 		
@@ -39,8 +44,8 @@ public class FileUtils {
 	
 	public static void main(String[] args) {
 		
-		File f = new File("D:\\DAM2\\PROGRAMACION\\texto.txt");
-		System.out.println(FileUtils.analiza(f));
+		File f = new File("D:\\DAM2\\PROGRAMACION");
+		FileUtils.analiza(f);
 		
 		
 		

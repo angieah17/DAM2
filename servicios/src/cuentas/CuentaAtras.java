@@ -1,6 +1,6 @@
 package cuentas;
 
-public class CuentaAtras {
+public class CuentaAtras extends Thread {
 	
 	private int valorInicial;
 	private String nombre;
@@ -13,13 +13,25 @@ public class CuentaAtras {
 	}
 	
 	
+	
+	
+	@Override
+	public void run() {
+		
+		arranca();
+	}
+
+
+	
+
 	public void arranca() {      
 		for (int i =valorInicial; i >= 0 ; i--) {
 			System.out.printf("%s: %d%n", nombre, i);
 			
-			for (int j = 0; j < 1_000_000_000; j++) {
-				i++;
-				i--;
+			try {
+				Thread.sleep(milis); //El .sleepp saca siempre una excepción que debemos gestionar
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 			
 		}
@@ -29,10 +41,14 @@ public class CuentaAtras {
 	public static void main(String[] args) {
 		
 		CuentaAtras c1 = new CuentaAtras(10, "C-1");
+		CuentaAtras c2 = new CuentaAtras(5, "C-2");
 		
-		c1.arranca();
-		
-		
+		System.out.println("PROGRAMA EMPEZANDO");
+		c1.start(); 
+		System.out.println("PROGRAMA EMPEZADO");
+		c2.start();
+		System.out.println("PROGRAMA TERMINADO");
+		//Al extender de Thread entiende que el run va en un hilo distinto 
 		
 		
 	}
